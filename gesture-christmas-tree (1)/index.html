@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gesture Christmas Tree</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Import Elegant Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+      body { margin: 0; background: #050505; overflow: hidden; font-family: 'Montserrat', sans-serif; }
+      #root { width: 100vw; height: 100vh; }
+      
+      /* Font Utilities */
+      .font-cinzel { font-family: 'Cinzel', serif; }
+      .font-vibes { font-family: 'Great Vibes', cursive; }
+      .font-mont { font-family: 'Montserrat', sans-serif; }
+
+      /* Text Glow Effects */
+      .text-gold-glow {
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+      }
+      .text-red-glow {
+        text-shadow: 0 0 10px rgba(196, 30, 58, 0.6);
+      }
+
+      /* Glassmorphism Utilities */
+      .glass-panel {
+        background: rgba(10, 20, 10, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 215, 0, 0.15);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      }
+      
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "three": "https://esm.sh/three@^0.182.0",
+    "@react-three/fiber": "https://esm.sh/@react-three/fiber@^9.4.2",
+    "@react-three/drei": "https://esm.sh/@react-three/drei@^10.7.7",
+    "uuid": "https://esm.sh/uuid@^13.0.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "@react-three/postprocessing": "https://esm.sh/@react-three/postprocessing@^3.0.4",
+    "@mediapipe/hands": "https://esm.sh/@mediapipe/hands@^0.4.1675469240"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- User Guidance Overlay for Local File Execution -->
+    <div id="setup-warning" style="display: none; position: fixed; inset: 0; background: #020502; color: #FFD700; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px;">
+        <h1 style="font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);">Local Setup Required</h1>
+        <p style="font-family: 'Montserrat', sans-serif; max-width: 600px; line-height: 1.6; color: #e0e0e0; margin-bottom: 30px;">
+            It seems you are trying to run this application directly from your file system (file://). 
+            <br/><br/>
+            Modern 3D web applications require a <strong>local web server</strong> to function correctly due to browser security policies regarding modules and camera access.
+        </p>
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); padding: 25px; border-radius: 12px; text-align: left; font-family: monospace; width: 100%; max-width: 500px;">
+            <p style="color: #888; margin: 0 0 10px 0;"># Recommended: Use Vite or a similar bundler</p>
+            <p style="color: #4ade80; margin: 0 0 20px 0;">npm create vite@latest my-app -- --template react-ts</p>
+            
+            <p style="color: #888; margin: 0 0 10px 0;"># Or start a simple HTTP server in this directory:</p>
+            <p style="color: #4ade80; margin: 0;">npx serve .</p>
+        </div>
+    </div>
+
+    <script>
+        // Check for file protocol or missing build environment
+        if (window.location.protocol === 'file:') {
+            document.getElementById('setup-warning').style.display = 'flex';
+            // Stop further execution to prevent console spam
+            throw new Error("Application halted: Cannot run via file:// protocol. Please use a local web server.");
+        }
+    </script>
+
+    <!-- Main Entry Point -->
+    <script type="module" src="./index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
